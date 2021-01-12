@@ -1,15 +1,11 @@
 #!/bin/bash
 #startup script
 
-bash /root/addcronjob.bash
-
-echo "$BROADCAST_IP" > /verbs/BROADCAST_IP
-echo "$MAC_ADDRESS" > /verbs/MAC_ADDRESS
-if [ -z "$TRIGGER_IP" ]
+if [ -z "$VNCPASSWORD" ]
 then
-	echo "No Trigger IP" >> log.log
+	echo "VNCPASSWORD" >> log.log
 else
-	echo "$TRIGGER_IP" > /verbs/TRIGGER_IP
+	vncpasswd -f <<<"$VNCPASSWORD" > /root/.vnc/passwd
 fi
-service cron start
+tightvncserver
 tail -fn0 log.log
