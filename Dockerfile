@@ -1,15 +1,14 @@
 FROM debian
 COPY keyb /tmp/.
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   xfce4 xfce4-goodies \
   tightvncserver \
-  < /tmp/keyb \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN mkdir /verbs
 WORKDIR /root
 ENV VNCPASSWORD W@lkom0123
 RUN mkdir .vnc
-RUN vncpasswd -f <<<"$VNCPASSWORD" > .vnc/passwd
+RUN /bin/bash -c "echo -e \"$VNCPASSWORD\n$VNCPASSWORD\nn\" | vncpasswd"; echo;
 RUN chmod 600 .vnc/passwd
 RUN chmod 700 .vnc
 COPY startup.sh .
