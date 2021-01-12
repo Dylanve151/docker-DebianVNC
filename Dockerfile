@@ -1,10 +1,9 @@
 FROM debian
 COPY keyb /tmp/.
 RUN apt-get update && apt-get install -y \
-  keyboard-configuration < /tmp/keyb
-RUN apt-get update && apt-get install -y \
   xfce4 xfce4-goodies \
   tightvncserver \
+  < /tmp/keyb \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN mkdir /verbs
 WORKDIR /root
