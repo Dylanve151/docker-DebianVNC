@@ -1,4 +1,5 @@
 FROM debian
+COPY keyb /tmp/.
 RUN apt-get update && apt-get install -y \
   xfce4 xfce4-goodies \
   tightvncserver \
