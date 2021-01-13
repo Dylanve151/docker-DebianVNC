@@ -8,5 +8,5 @@ else
 	vncpasswd -f <<<"$VNCPASSWORD" > /root/.vnc/passwd
 	chmod 600 /root/.vnc/passwd
 fi
-sudo tightvncserver :1 --httpport 5900
+sudo tightvncserver :1
 tail -fn0 log.log
